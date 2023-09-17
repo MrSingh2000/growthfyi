@@ -26,7 +26,7 @@ export default function Home({ }: Props) {
   }
 
   // Function to preprocess data from the API response
-  const preprocessData = (response) => {
+  const preprocessData = (response: Record<string, any>) => {
     // Extract relevant data from the response
     const d = response.tasks[0].result[0].items[0].meta;
     const onPageResultObj = d.content;

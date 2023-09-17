@@ -65,7 +65,7 @@ export default function Home({ }: Props) {
   }
 
   // Function to fetch data from the API
-  const handleFetchData = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFetchData = async (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.preventDefault();
     setData({ response: null, onPageResultArray: null, checksArray: null });
     if (!seoUrl)

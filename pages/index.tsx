@@ -9,13 +9,13 @@ const inter = Inter({ subsets: ['latin'] });
 type Props = {}
 
 type Data = {
-  response: Record<string, any> | null,
-  onPageResultArray: { key: string, value: number }[] | null,
-  checksArray: { key: string, value: boolean }[] | null,
+  response: Record<string, any>,
+  onPageResultArray: { key: string, value: number }[],
+  checksArray: { key: string, value: boolean }[],
 }
 
 export default function Home({ }: Props) {
-  const [data, setData] = useState < Data > ({ response: null, onPageResultArray: null, checksArray: null });
+  const [data, setData] = useState < Data > ({ response: {}, onPageResultArray: [], checksArray: [] });
   const [seoUrl, setSeoUrl] = useState < string > ("");
   const [loading, setLoading] = useState < boolean > (false);
 
@@ -65,9 +65,9 @@ export default function Home({ }: Props) {
   }
 
   // Function to fetch data from the API
-  const handleFetchData = async (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+  const handleFetchData = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    setData({ response: null, onPageResultArray: null, checksArray: null });
+    setData({ response: {}, onPageResultArray: [], checksArray: [] });
     if (!seoUrl)
       return;
     setLoading(true);
@@ -125,7 +125,8 @@ export default function Home({ }: Props) {
       </div>
 
       {/* Scores */}
-      {loading ? <Loader /> : data.response ? (<div>
+      {loading ? <Loader /> : data.response.tasks
+       ? (<div>
         <div className="w-full">
           <div className='block md:flex justify-around'>
             {displayScoreBlock("On page score", data?.response?.tasks[0]?.result[0].items[0].onpage_score.toString())}
